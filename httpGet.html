@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+	<head>
+		<meta charset="utf-8">
+		<title>angular model</title>
+		<script type="text/javascript" src="js/jqury.js"></script>
+		<script type="text/javascript" src="js/angular.js"></script>
+
+	</head>
+
+	<body ng-controller="PhoneListCtrl">
+		Search:
+		<input ng-model="query">
+		<!--
+        	作者：soyesman@163.com
+        	时间：2015-08-25
+        	描述：过滤指定字段值
+        -->
+		<ul>
+			<li ng-repeat="phone in phones | filter:{name: query}">
+				{{phone.name}}
+				<p>{{phone.snippet}}</p>
+				<p>{{phone.age}}</p>
+
+			</li>
+		</ul>
+		<script type="application/javascript">
+			var myApp = angular.module('app', []);
+			myApp.controller('PhoneListCtrl', PhoneListCtrl);
+			 //需要注入$http
+			function PhoneListCtrl($scope, $http) {
+					$http.get('http://127.0.0.1/web/angular/php/phonesGet.php?uid=xx').success(function(data) {
+						$scope.phones = data;
+					});
+				
+			}
+		</script>
+	</body>
+
+</html>

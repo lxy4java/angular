@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+	<head>
+		<meta charset="utf-8">
+		<title>angular model</title>
+		<script type="text/javascript" src="js/jqury.js"></script>
+		<script type="text/javascript" src="js/angular.js"></script>
+
+	</head>
+
+	<body ng-controller="PhoneListCtrl">
+		Search:
+		<input ng-model="query">
+		<!--
+        	作者：soyesman@163.com
+        	时间：2015-08-25
+        	描述：过滤指定字段值
+        -->	
+		<ul>
+			<li ng-repeat="phone in phones | filter:{name: query}">
+				{{phone.name}}
+				<p>{{phone.snippet}}</p>
+				<p>{{phone.age}}</p>
+
+			</li>
+		</ul>
+			
+		<!--
+        	作者：soyesman@163.com
+        	时间：2015-08-25
+        	描述：过滤全面值
+        -->	
+		<ul>
+			<li ng-repeat="phone in phones | filter:query">
+				{{phone.name}}
+				<p>{{phone.snippet}}</p>
+				<p>{{phone.age}}</p>
+
+			</li>
+		</ul>
+
+		<script type="application/javascript">
+			var myApp = angular.module('app', []);
+			myApp.controller('PhoneListCtrl', PhoneListCtrl);
+
+			function PhoneListCtrl($scope) {
+				$scope.phones = [{
+					"name": "Nexus S  Next",
+					"snippet": "Fast just got faster with Nexus S.",
+					"age": 0
+				}, {
+					"name": "Motorola XOOM™ with Wi-Fi",
+					"snippet": "The Next, Next Generation tablet.",
+					"age": 1
+				}, {
+					"name": "MOTOROLA XOOM™",
+					"snippet": "The Next, Next Generation tablet.",
+					"age": 2
+				}];
+				$scope.orderProp = 'age';
+				$scope.mysort = true;
+			}
+		</script>
+	</body>
+
+</html>

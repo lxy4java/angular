@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+	<head>
+		<meta charset="utf-8">
+		<title>angular model</title>
+		<script type="text/javascript" src="js/jqury.js"></script>
+		<script type="text/javascript" src="js/angular.js"></script>
+
+	</head>
+
+	<body ng-controller="PhoneListCtrl">
+		<!--
+        	true 是降序，false 为升序
+        -->
+		<ul>
+			<li ng-repeat="phone in phones | filter:query | orderBy:orderProp:true">
+				{{phone.name}}
+				<p>{{phone.snippet}}</p>
+			</li>
+		</ul>
+		Search:
+		<input ng-model="query">
+
+		<select ng-model="orderProp">
+			<option value="name">Alphabetical</option>
+			<option value="age">Newest</option>
+		</select>
+
+		<script type="application/javascript">
+			var myApp = angular.module('app', []);
+			myApp.controller('PhoneListCtrl', PhoneListCtrl);
+
+			function PhoneListCtrl($scope) {
+				$scope.phones = [{
+					"name": "Nexus S  Next",
+					"snippet": "Fast just got faster with Nexus S.",
+					"age": 0
+				}, {
+					"name": "Motorola XOOM™ with Wi-Fi",
+					"snippet": "The Next, Next Generation tablet.",
+					"age": 1
+				}, {
+					"name": "MOTOROLA XOOM™",
+					"snippet": "The Next, Next Generation tablet.",
+					"age": 2
+				}];
+				$scope.orderProp = 'age';
+			}
+		</script>
+	</body>
+
+</html>
